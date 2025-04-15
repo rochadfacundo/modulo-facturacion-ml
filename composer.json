@@ -1,0 +1,18 @@
+{
+    "name": "facundo/prueba-mercadopago",
+    "description": "Prueba de integración MercadoPago en PHP",
+    "autoload": {
+        "psr-4": {
+            "Facundo\\PruebaMercadopago\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "facc15",
+            "email": "facc.15@live.com.ar"
+        }
+    ],
+    "require": {
+        "mercadopago/dx-php": "^3.2"
+    }
+}
