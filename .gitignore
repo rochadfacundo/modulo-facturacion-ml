@@ -1,0 +1,17 @@
+# Archivo de configuración sensible
+config.php
+
+# Dependencias instaladas con Composer
+/vendor/
+
+/composer.lock
+
+# Archivos temporales del sistema operativo o editores
+*.log
+*.env
+.DS_Store
+*.swp
+*.bak
+
+# Archivos del editor (VS Code)
+.vscode/
