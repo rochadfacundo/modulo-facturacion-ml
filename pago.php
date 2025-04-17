@@ -1,33 +1,29 @@
 <?php
-require __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/src/MercadoPagoService.php';
 
-// Cargar config
 $config = require __DIR__ . '/config.php';
+$mp = new MercadoPagoService($config['access_token']);
 
-// Setear el token de acceso
-MercadoPago\SDK::setAccessToken($config['access_token']);
+// Token generado con Postman o frontend
+$token = "bdd70e0913692d27482c31cf7ede9632";  
+try {
+    $resultado = $mp->crearPago([
+        "transaction_amount" => 100,
+        "token" => $token,
+        "description" => "Pago usando cURL sin SDK",
+        "installments" => 1,
+        "payment_method_id" => "visa",
+        "payer" => [
+            "entity_type" => "individual",
+            "type" => "customer",
+            "identification" => [
+                "type" => "DNI",
+                "number" => "12345678"
+            ]
+        ]
+    ]);
 
-// Obtener el token del frontend (se pasa como JSON)
-$data = json_decode(file_get_contents('php://input'), true);
-$token = $data['token'];  // El token generado por MercadoPago desde el frontend
-
-// Crear un objeto de pago
-$payment = new MercadoPago\Payment();
-$payment->transaction_amount = 100; // Monto de la transacción
-$payment->token = $token;           // El token de tarjeta generado en el frontend
-$payment->description = 'Pago de prueba';
-$payment->installments = 1;         // Número de cuotas
-$payment->payment_method_id = 'visa';  // Método de pago ('visa', 'master', etc.)
-$payment->payer = array(
-    "email" => "test_user_123456@testuser.com"  // Email del comprador (puedes usar un email de prueba)
-);
-
-// Guardar el pago
-$payment->save();
-
-// Verificar el estado del pago
-echo json_encode([
-    'status' => $payment->status,               // Estado del pago
-    'status_detail' => $payment->status_detail  // Detalle del estado del pago
-]);
-?>
+    echo json_encode($resultado, JSON_PRETTY_PRINT);
+} catch (Exception $e) {
+    echo "❌ Error: " . $e->getMessage();
+}
