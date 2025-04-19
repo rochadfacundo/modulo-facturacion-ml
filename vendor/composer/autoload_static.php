@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInit533abf8044b3f2b74c6a8544b729d45a
 {
     public static $prefixLengthsPsr4 = array (
+        'M' => 
+        array (
+            'MercadoPago\\' => 12,
+        ),
         'F' => 
         array (
             'Facundo\\PruebaMercadopago\\' => 26,
@@ -14,6 +18,10 @@ class ComposerStaticInit533abf8044b3f2b74c6a8544b729d45a
     );
 
     public static $prefixDirsPsr4 = array (
+        'MercadoPago\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mercadopago/dx-php/src/MercadoPago',
+        ),
         'Facundo\\PruebaMercadopago\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
